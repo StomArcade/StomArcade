@@ -22,7 +22,7 @@ public class StomArcadeServer {
             serverAddress = "0.0.0.0";
         }
 
-        int serverPort = 25565;
+        int serverPort = 25566;
 
         try {
             serverPort = Integer.parseInt(System.getenv("SERVER_PORT"));
