@@ -17,6 +17,12 @@ dependencies {
 
     // Minestom
     implementation("net.minestom:minestom:2025.12.20-1.21.11")
+
+    // Polar
+    implementation("dev.hollowcube:polar:1.15.0")
+
+    // Misc
+    implementation("it.unimi.dsi:fastutil:8.5.18")
 }
 
 tasks.test {
