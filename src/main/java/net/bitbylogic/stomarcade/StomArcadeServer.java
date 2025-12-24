@@ -6,12 +6,21 @@ import net.minestom.server.MinecraftServer;
 public class StomArcadeServer {
 
     public static void main(String[] args) {
+        String velocitySecret = System.getenv("VELOCITY_SECRET");
+
+        if (velocitySecret == null) {
+            throw new RuntimeException("Velocity secret not set");
+        }
+
         MinecraftServer.setCompressionThreshold(0);
 
-        String velocitySecret = System.getenv("VELOCITY_SECRET");
         MinecraftServer minecraftServer = MinecraftServer.init(new Auth.Velocity(velocitySecret));
 
         String serverAddress = System.getenv("SERVER_ADDRESS");
+
+        if (serverAddress == null) {
+            serverAddress = "0.0.0.0";
+        }
 
         int serverPort = 25565;
 
