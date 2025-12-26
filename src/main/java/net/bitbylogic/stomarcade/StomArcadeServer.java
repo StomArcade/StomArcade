@@ -1,8 +1,13 @@
 package net.bitbylogic.stomarcade;
 
+import net.bitbylogic.stomarcade.command.GamemodeCommand;
+import net.bitbylogic.stomarcade.command.PermissionCommand;
+import net.bitbylogic.stomarcade.permission.manager.PermissionManager;
 import net.hollowcube.polar.PolarLoader;
+import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
 import net.minestom.server.Auth;
 import net.minestom.server.MinecraftServer;
+import net.minestom.server.command.ConsoleSender;
 import net.minestom.server.event.player.AsyncPlayerConfigurationEvent;
 import net.minestom.server.instance.InstanceContainer;
 import net.minestom.server.instance.InstanceManager;
@@ -10,8 +15,11 @@ import net.minestom.server.instance.SharedInstance;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Scanner;
 
 public class StomArcadeServer {
+
+    private static final ComponentLogger LOGGER = ComponentLogger.logger("Stom Arcade");
 
     static void main(String[] args) {
         String velocitySecret = System.getenv("VELOCITY_SECRET");
@@ -23,6 +31,10 @@ public class StomArcadeServer {
         MinecraftServer.setCompressionThreshold(0);
 
         MinecraftServer minecraftServer = MinecraftServer.init(new Auth.Velocity(velocitySecret));
+
+        PermissionManager permissionManager = new PermissionManager();
+
+        MinecraftServer.getCommandManager().register(new GamemodeCommand(), new PermissionCommand());
 
         InstanceManager instanceManager = MinecraftServer.getInstanceManager();
         InstanceContainer instanceContainer = instanceManager.createInstanceContainer();
@@ -42,9 +54,9 @@ public class StomArcadeServer {
 
         SharedInstance sharedInstance = instanceManager.createSharedInstance(instanceContainer);
 
-        MinecraftServer.getGlobalEventHandler().addListener(AsyncPlayerConfigurationEvent.class, event -> {
-           event.setSpawningInstance(sharedInstance);
-        });
+        MinecraftServer.getGlobalEventHandler().addListener(AsyncPlayerConfigurationEvent.class,
+                        event -> event.setSpawningInstance(sharedInstance))
+                .addChild(permissionManager.node());
 
         String serverAddress = System.getenv("SERVER_ADDRESS");
 
@@ -61,6 +73,14 @@ public class StomArcadeServer {
         }
 
         minecraftServer.start(serverAddress, serverPort);
+
+        Scanner scanner = new Scanner(System.in);
+
+        while (scanner.hasNext()) {
+            String command = scanner.nextLine();
+
+            MinecraftServer.getCommandManager().execute(new ConsoleSender(), command);
+        }
     }
 
 }
