@@ -22,6 +22,7 @@ dependencies {
     implementation("it.unimi.dsi:fastutil:8.5.18")
     implementation("dev.hollowcube:polar:1.15.0")
     implementation("ch.qos.logback:logback-classic:1.5.23")
+    implementation("net.kyori:adventure-text-minimessage:4.25.0")
 }
 
 tasks.test {
