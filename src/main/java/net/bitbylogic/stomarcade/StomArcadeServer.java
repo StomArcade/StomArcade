@@ -3,6 +3,7 @@ package net.bitbylogic.stomarcade;
 import net.bitbylogic.stomarcade.command.GamemodeCommand;
 import net.bitbylogic.stomarcade.command.PermissionCommand;
 import net.bitbylogic.stomarcade.command.VersionCommand;
+import net.bitbylogic.stomarcade.loot.LootTableManager;
 import net.bitbylogic.stomarcade.permission.manager.PermissionManager;
 import net.hollowcube.polar.PolarLoader;
 import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
@@ -33,6 +34,7 @@ public class StomArcadeServer {
 
         MinecraftServer minecraftServer = MinecraftServer.init(new Auth.Velocity(velocitySecret));
 
+        LootTableManager lootTableManager = new LootTableManager();
         PermissionManager permissionManager = new PermissionManager();
 
         MinecraftServer.getCommandManager().register(new GamemodeCommand(), new PermissionCommand(), new VersionCommand());
