@@ -1,5 +1,6 @@
 package net.bitbylogic.stomarcade.loot;
 
+import net.bitbylogic.stomarcade.StomArcadeServer;
 import net.goldenstack.loot.LootTable;
 import net.goldenstack.loot.Trove;
 import net.kyori.adventure.key.Key;
@@ -104,7 +105,7 @@ public class LootTableManager {
         LOOT_TABLES.clear();
         LOOT_TABLES.putAll(Trove.readTables(LOOT_TABLE_FOLDER.toPath()));
 
-        System.out.println("Loaded " + LOOT_TABLES.size() + " loot tables.");
+        StomArcadeServer.LOGGER.info("[Loot Table Manager]: Loaded " + LOOT_TABLES.size() + " loot tables.");
     }
 
     public static File getLootTableFolder() {
