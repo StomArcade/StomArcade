@@ -4,9 +4,11 @@ import net.bitbylogic.stomarcade.StomArcadeServer;
 import net.bitbylogic.stomarcade.message.MessageKey;
 import net.bitbylogic.stomarcade.permission.command.PermissionedCommand;
 import net.bitbylogic.stomarcade.util.message.MessageUtil;
+import net.minestom.server.command.builder.arguments.Argument;
 import net.minestom.server.command.builder.arguments.ArgumentLiteral;
 import net.minestom.server.command.builder.arguments.ArgumentString;
 import net.minestom.server.command.builder.arguments.ArgumentType;
+import net.minestom.server.command.builder.suggestion.SuggestionEntry;
 
 import java.io.IOException;
 
@@ -23,8 +25,22 @@ public class MessagesCommand extends PermissionedCommand {
             sender.sendMessage(MessageUtil.error("/messages reload"));
         });
 
-        ArgumentString key = ArgumentType.String("key");
+        Argument<String> key = ArgumentType.String("key").setSuggestionCallback((sender, context, suggestion) ->
+                StomArcadeServer.messages().all().forEach(messageKey -> suggestion.addEntry(new SuggestionEntry(messageKey.path()))));
+
         ArgumentLiteral reload = ArgumentType.Literal("reload");
+
+        addSyntax((sender, _) -> {
+            try {
+                StomArcadeServer.messages().reload();
+            } catch (IOException e) {
+                sender.sendMessage(MessageUtil.error("Failed to reload messages"));
+                StomArcadeServer.LOGGER.error("Failed to reload messages", e);
+                return;
+            }
+
+            sender.sendMessage(MessageUtil.success("Messages reloaded!"));
+        }, reload);
 
         addSyntax((sender, context) -> {
             String keyString = context.get(key);
@@ -38,17 +54,6 @@ public class MessagesCommand extends PermissionedCommand {
             messageKey.send(sender);
         }, key);
 
-        addSyntax((sender, _) -> {
-            try {
-                StomArcadeServer.messages().reload();
-            } catch (IOException e) {
-                sender.sendMessage(MessageUtil.error("Failed to reload messages"));
-                StomArcadeServer.LOGGER.error("Failed to reload messages", e);
-                return;
-            }
-
-            sender.sendMessage(MessageUtil.success("Messages reloaded!"));
-        }, reload);
     }
 
 }
