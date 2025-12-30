@@ -28,6 +28,7 @@ dependencies {
 
     // Misc
     implementation("org.slf4j:slf4j-api:2.0.16")
+    implementation("io.github.togar2:MinestomPvP:2025.12.29-1.21.11")
     implementation("it.unimi.dsi:fastutil:8.5.18")
     implementation("net.kyori:adventure-text-logger-slf4j:4.26.1")
     implementation("com.github.Carleslc.Simple-YAML:Simple-Yaml:1.8.4")
