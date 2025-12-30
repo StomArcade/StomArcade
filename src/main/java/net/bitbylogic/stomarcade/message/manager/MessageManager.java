@@ -3,6 +3,8 @@ package net.bitbylogic.stomarcade.message.manager;
 import net.bitbylogic.stomarcade.StomArcadeServer;
 import net.bitbylogic.stomarcade.message.MessageGroup;
 import net.bitbylogic.stomarcade.message.MessageKey;
+import net.bitbylogic.stomarcade.message.event.MessagesReloadedEvent;
+import net.minestom.server.MinecraftServer;
 import org.jetbrains.annotations.NotNull;
 import org.simpleyaml.configuration.file.FileConfiguration;
 import org.simpleyaml.configuration.file.YamlConfiguration;
@@ -78,6 +80,8 @@ public final class MessageManager {
         for (MessageKey key : REGISTRY.values()) {
             loadKey(key);
         }
+
+        MinecraftServer.getGlobalEventHandler().call(new MessagesReloadedEvent());
     }
 
     private void loadKey(@NotNull MessageKey key) throws IOException {
