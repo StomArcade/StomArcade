@@ -28,7 +28,11 @@ public class MessageUtil {
                             .build()
             ).build();
 
-    public static Component miniDeserialize(@NotNull String message, TagResolver.Single... placeholders) {
+    public static String serialize(@NotNull Component component) {
+        return MINI_MESSAGE.serialize(component);
+    }
+
+    public static Component deserialize(@NotNull String message, TagResolver.Single... placeholders) {
         return MINI_MESSAGE.deserialize(message, placeholders);
     }
 

@@ -23,7 +23,7 @@ public class MessageTestCommand extends PermissionedCommand {
 
         Argument<String> message = new ArgumentString("message");
 
-        addSyntax((sender, context) -> sender.sendMessage(MessageUtil.miniDeserialize(context.get(message))), message);
+        addSyntax((sender, context) -> sender.sendMessage(MessageUtil.deserialize(context.get(message))), message);
 
         addSyntax((sender, context) -> sender.sendMessage(MessageUtil.primary(context.get(message))), main, message);
         addSyntax((sender, context) -> sender.sendMessage(MessageUtil.error(context.get(message))), error, message);

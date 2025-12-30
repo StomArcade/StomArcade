@@ -61,11 +61,11 @@ public class MessageKey {
     }
 
     public Component get(@NotNull Locale locale, TagResolver.Single... modifiers) {
-        return MessageUtil.miniDeserialize(values.getOrDefault(locale, values.get(Locale.ENGLISH)).getFirst(), modifiers);
+        return MessageUtil.deserialize(values.getOrDefault(locale, values.get(Locale.ENGLISH)).getFirst(), modifiers);
     }
 
     public Component get(TagResolver.Single... modifiers) {
-        return MessageUtil.miniDeserialize(values.get(Locale.ENGLISH).getFirst(), modifiers);
+        return MessageUtil.deserialize(values.get(Locale.ENGLISH).getFirst(), modifiers);
     }
 
     public String getPlain() {
@@ -89,7 +89,7 @@ public class MessageKey {
     }
 
     public void send(@NotNull Audience audience, @NotNull Locale locale, TagResolver.Single... modifiers) {
-        values.getOrDefault(locale, values.get(Locale.ENGLISH)).forEach(message -> audience.sendMessage(MessageUtil.miniDeserialize(message, modifiers)));
+        values.getOrDefault(locale, values.get(Locale.ENGLISH)).forEach(message -> audience.sendMessage(MessageUtil.deserialize(message, modifiers)));
     }
 
     public @NotNull String path() {
