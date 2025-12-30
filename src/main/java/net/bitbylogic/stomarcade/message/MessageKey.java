@@ -1,6 +1,6 @@
 package net.bitbylogic.stomarcade.message;
 
-import net.bitbylogic.stomarcade.util.MessageUtil;
+import net.bitbylogic.stomarcade.util.message.MessageUtil;
 import net.bitbylogic.stomarcade.util.context.ContextKeys;
 import net.bitbylogic.utils.context.Context;
 import net.kyori.adventure.audience.Audience;
@@ -66,6 +66,10 @@ public class MessageKey {
 
     public Component get(TagResolver.Single... modifiers) {
         return MessageUtil.miniDeserialize(values.get(Locale.ENGLISH).getFirst(), modifiers);
+    }
+
+    public String getPlain() {
+        return values.get(Locale.ENGLISH).getFirst();
     }
 
     public void send(@NotNull Context context, TagResolver.Single... modifiers) {
