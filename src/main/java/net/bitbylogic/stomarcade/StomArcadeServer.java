@@ -60,7 +60,8 @@ public final class StomArcadeServer {
         featureManager.enableFeature(
                 ArcadeFeature.BLOCK_DROP,
                 ArcadeFeature.ITEM_PICKUP,
-                ArcadeFeature.ITEM_DROP
+                ArcadeFeature.ITEM_DROP,
+                ArcadeFeature.TABLIST
         );
 
         MinecraftServer.getCommandManager().register(
