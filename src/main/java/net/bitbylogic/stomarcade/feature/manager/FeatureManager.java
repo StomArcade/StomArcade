@@ -1,7 +1,9 @@
 package net.bitbylogic.stomarcade.feature.manager;
 
 import net.bitbylogic.stomarcade.feature.ArcadeFeature;
+import net.bitbylogic.stomarcade.feature.EventFeature;
 import net.bitbylogic.stomarcade.feature.Feature;
+import net.minestom.server.MinecraftServer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -23,6 +25,11 @@ public class FeatureManager {
         }
 
         enabledFeatures.put(feature.id(), feature);
+
+        if (feature instanceof EventFeature eventFeature) {
+            MinecraftServer.getGlobalEventHandler().addChild(eventFeature.node());
+        }
+
         feature.onEnable();
     }
 
@@ -37,6 +44,10 @@ public class FeatureManager {
 
         if (!removed) {
             return;
+        }
+
+        if (feature instanceof EventFeature eventFeature) {
+            MinecraftServer.getGlobalEventHandler().removeChild(eventFeature.node());
         }
 
         feature.onDisable();
