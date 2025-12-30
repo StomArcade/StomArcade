@@ -67,6 +67,7 @@ public final class StomArcadeServer {
                 ServerFeature.TABLIST,
                 ServerFeature.CHAT,
                 ServerFeature.SERVER_LIST,
+                ServerFeature.PICK_BLOCK,
                 ServerFeature.MODERN_VANILLA
         );
 
