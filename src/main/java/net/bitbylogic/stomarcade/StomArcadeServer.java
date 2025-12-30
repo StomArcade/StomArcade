@@ -1,5 +1,6 @@
 package net.bitbylogic.stomarcade;
 
+import io.github.togar2.pvp.MinestomPvP;
 import net.bitbylogic.orm.BormAPI;
 import net.bitbylogic.stomarcade.command.*;
 import net.bitbylogic.stomarcade.feature.ServerFeature;
@@ -57,13 +58,16 @@ public final class StomArcadeServer {
 
         messageManager.registerGroup(new BrandingMessages());
 
+        MinestomPvP.init();
+
         featureManager.enableFeature(
                 ServerFeature.BLOCK_DROP,
                 ServerFeature.ITEM_PICKUP,
                 ServerFeature.ITEM_DROP,
                 ServerFeature.TABLIST,
                 ServerFeature.CHAT,
-                ServerFeature.SERVER_LIST
+                ServerFeature.SERVER_LIST,
+                ServerFeature.MODERN_VANILLA
         );
 
         MinecraftServer.getCommandManager().register(
