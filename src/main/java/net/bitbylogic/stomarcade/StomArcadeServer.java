@@ -10,6 +10,7 @@ import net.bitbylogic.stomarcade.message.manager.MessageManager;
 import net.bitbylogic.stomarcade.message.messages.BrandingMessages;
 import net.bitbylogic.stomarcade.permission.manager.PermissionManager;
 import net.bitbylogic.stomarcade.util.PermissionUtil;
+import net.bitbylogic.stomarcade.util.message.MessageUtil;
 import net.hollowcube.polar.PolarLoader;
 import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
 import net.minestom.server.Auth;
@@ -113,7 +114,7 @@ public final class StomArcadeServer {
         } catch (NumberFormatException ignored) {}
 
         minecraftServer.start(serverAddress, serverPort);
-        MinecraftServer.setBrandName("StomArcade (Minestom)");
+        MinecraftServer.setBrandName(MessageUtil.serialize(BrandingMessages.SERVER_BRANDING.get()));
 
         LOGGER.info("Server started on {}:{}", serverAddress, serverPort);
 
