@@ -132,7 +132,7 @@ public final class StomArcadeServer {
                 });
 
         String serverAddress = System.getenv().getOrDefault("SERVER_ADDRESS", "0.0.0.0");
-        int serverPort = 25566;
+        int serverPort = 25565;
 
         try {
             serverPort = Integer.parseInt(System.getenv("SERVER_PORT"));
