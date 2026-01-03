@@ -13,7 +13,7 @@ public class StaffChatCommand extends PermissionedCommand {
     public StaffChatCommand() {
         super("staffchat", "sc");
 
-        setPermission("stomarcade.staffchat");
+        setPermission("stomarcade.staff");
 
         setDefaultExecutor((sender, _) -> sender.sendMessage(MessageUtil.error("Usage: /staffchat <message>")));
 
