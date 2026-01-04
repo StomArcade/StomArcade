@@ -61,8 +61,6 @@ tasks.withType<JavaCompile>().configureEach {
 }
 
 tasks.withType<ShadowJar> {
-    minimize()
-
     archiveBaseName.set("StomArcade")
     archiveClassifier.set("")
 
