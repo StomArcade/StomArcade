@@ -3,6 +3,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 plugins {
     id("groovy")
     id("com.gradleup.shadow") version "9.3.0"
+    id("maven-publish")
 }
 
 group = "net.bitbylogic"
@@ -43,14 +44,21 @@ dependencies {
     runtimeOnly("ch.qos.logback:logback-classic:1.5.23")
 }
 
-tasks.test {
-    useJUnitPlatform()
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            groupId = "net.bitbylogic"
+            artifactId = "stomarcade"
+            version = "$version"
+
+            from(components["java"])
+        }
+    }
 }
 
 tasks.withType<JavaCompile>().configureEach {
     options.compilerArgs.add("-parameters")
 }
-
 
 tasks.withType<ShadowJar> {
     minimize()
