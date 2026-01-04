@@ -13,6 +13,7 @@ import net.bitbylogic.stomarcade.message.command.MessagesCommand;
 import net.bitbylogic.stomarcade.message.manager.MessageManager;
 import net.bitbylogic.stomarcade.message.messages.BrandingMessages;
 import net.bitbylogic.stomarcade.message.messages.ServerMessages;
+import net.bitbylogic.stomarcade.minigame.manager.MinigameManager;
 import net.bitbylogic.stomarcade.permission.manager.PermissionManager;
 import net.bitbylogic.stomarcade.redis.AnnounceListener;
 import net.bitbylogic.stomarcade.redis.CommandListener;
@@ -57,6 +58,7 @@ public final class StomArcadeServer {
     private static ServerManager serverManager;
 
     private static SharedInstance sharedInstance;
+    private static MinigameManager minigameManager;
 
     static void main(String[] args) {
         String velocitySecret = System.getenv("VELOCITY_SECRET");
@@ -142,6 +144,7 @@ public final class StomArcadeServer {
         }
 
         sharedInstance = instanceManager.createSharedInstance(instanceContainer);
+        minigameManager = new MinigameManager();
 
         MinecraftServer.getGlobalEventHandler()
                 .addListener(AsyncPlayerConfigurationEvent.class,
@@ -184,7 +187,9 @@ public final class StomArcadeServer {
     public static BormAPI borm() { return bormAPI; }
     public static RedisManager redis() { return redisManager; }
     public static RedisClient redisClient() { return redisClient; }
+    public static ServerManager serverManager() { return serverManager; }
     public static SharedInstance sharedInstance() { return sharedInstance; }
+    public static MinigameManager minigames() { return minigameManager; }
 
     private static BormAPI loadBORM() {
         String host = System.getenv("SQL_HOST");
