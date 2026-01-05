@@ -1,6 +1,7 @@
 package net.bitbylogic.stomarcade.feature.impl;
 
 import net.bitbylogic.stomarcade.feature.EventFeature;
+import net.minestom.server.entity.GameMode;
 import net.minestom.server.entity.Player;
 import net.minestom.server.event.player.PlayerPickBlockEvent;
 import net.minestom.server.item.ItemStack;
@@ -13,6 +14,10 @@ public class PickBlockFeature extends EventFeature {
 
         node().addListener(PlayerPickBlockEvent.class, event -> {
             Player player = event.getPlayer();
+
+            if (player.getGameMode() != GameMode.CREATIVE) {
+                return;
+            }
 
             Material material = event.getBlock().registry().material();
 
