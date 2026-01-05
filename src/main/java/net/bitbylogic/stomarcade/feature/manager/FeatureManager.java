@@ -15,7 +15,7 @@ public class FeatureManager {
 
     public void enableFeature(@NotNull ServerFeature... features) {
         for (ServerFeature feature : features) {
-            enableFeature(feature.getFeature());
+            enableFeature(feature.feature());
         }
     }
 
@@ -35,7 +35,7 @@ public class FeatureManager {
 
     public void disableFeature(@NotNull ServerFeature... features) {
         for (ServerFeature feature : features) {
-            disableFeature(feature.getFeature());
+            disableFeature(feature.feature());
         }
     }
 
@@ -53,7 +53,11 @@ public class FeatureManager {
         feature.onDisable();
     }
 
-    public Map<String, Feature> getEnabledFeatures() {
+    public boolean isFeatureEnabled(@NotNull ServerFeature feature) {
+        return enabledFeatures.containsKey(feature.feature().id());
+    }
+
+    public Map<String, Feature> enabledFeatures() {
         return Map.copyOf(enabledFeatures);
     }
 
