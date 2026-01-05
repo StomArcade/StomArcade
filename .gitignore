@@ -43,3 +43,10 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+/db.sqlite
+/db.sqlite-shm
+/db.sqlite-wal
+/dice.polar
+/minigames/*
+/loot_tables/*
+/messages/*
