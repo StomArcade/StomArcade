@@ -16,6 +16,7 @@ public enum ServerFeature {
     CHAT(new ChatFeature()),
     SERVER_LIST(new ServerListFeature()),
     PICK_BLOCK(new PickBlockFeature()),
+    SPAWN(new SpawnFeature()),
 
     // Minestom PVP
     MODERN_VANILLA(new MinestomPVPFeature("modern_vanilla", CombatFeatures.modernVanilla())),

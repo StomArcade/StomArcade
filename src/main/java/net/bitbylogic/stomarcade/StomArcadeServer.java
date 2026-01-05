@@ -107,7 +107,8 @@ public final class StomArcadeServer {
                 ServerFeature.TABLIST,
                 ServerFeature.CHAT,
                 ServerFeature.SERVER_LIST,
-                ServerFeature.MODERN_VANILLA
+                ServerFeature.MODERN_VANILLA,
+                ServerFeature.SPAWN
         );
 
         MinecraftServer.getCommandManager().register(
