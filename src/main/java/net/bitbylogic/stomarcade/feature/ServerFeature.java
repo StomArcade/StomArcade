@@ -1,6 +1,5 @@
 package net.bitbylogic.stomarcade.feature;
 
-import io.github.togar2.pvp.feature.CombatFeatureSet;
 import io.github.togar2.pvp.feature.CombatFeatures;
 import net.bitbylogic.stomarcade.feature.impl.*;
 import net.bitbylogic.stomarcade.feature.impl.chat.ChatFeature;
@@ -61,7 +60,7 @@ public enum ServerFeature {
         this.feature = feature;
     }
 
-    public Feature getFeature() {
+    public Feature feature() {
         return feature;
     }
 
