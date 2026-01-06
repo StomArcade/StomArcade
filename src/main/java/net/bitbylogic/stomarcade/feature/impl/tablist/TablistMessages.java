@@ -14,8 +14,8 @@ public class TablistMessages extends MessageGroup {
 
     @Override
     public void register() {
-        HEADER = register("Header", "<primary><bold>ꜱᴛᴏᴍ ᴀʀᴄᴀᴅᴇ<newline><newline>");
-        FOOTER = register("Footer", "<newline><newline><highlight>           ʏᴇᴀʜ, ᴡᴇ ʜᴀᴠᴇ ᴍɪɴɪɢᴀᴍᴇꜱ.           ");
+        HEADER = register("Header", "<primary><bold>ꜱᴛᴏᴍ ᴀʀᴄᴀᴅᴇ<newline><reset><gray><italic><smallcaps><kardia_id><newline>");
+        FOOTER = register("Footer", "<newline><highlight>           ʏᴇᴀʜ, ᴡᴇ ʜᴀᴠᴇ ᴍɪɴɪɢᴀᴍᴇꜱ.           ");
     }
 
 }
