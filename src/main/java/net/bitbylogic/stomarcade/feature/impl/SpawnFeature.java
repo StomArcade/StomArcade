@@ -1,6 +1,5 @@
 package net.bitbylogic.stomarcade.feature.impl;
 
-import net.bitbylogic.stomarcade.StomArcadeServer;
 import net.bitbylogic.stomarcade.command.SetSpawnCommand;
 import net.bitbylogic.stomarcade.command.SpawnCommand;
 import net.bitbylogic.stomarcade.feature.EventFeature;
@@ -8,6 +7,7 @@ import net.bitbylogic.stomarcade.util.position.PositionUtil;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.coordinate.Pos;
 import net.minestom.server.event.player.PlayerLoadedEvent;
+import net.minestom.server.event.player.PlayerMoveEvent;
 
 public class SpawnFeature extends EventFeature {
 
@@ -20,8 +20,15 @@ public class SpawnFeature extends EventFeature {
         config().addDefault("Spawn-Position", PositionUtil.serialize(Pos.ZERO));
         saveConfig();
 
-        node().addListener(PlayerLoadedEvent.class, event ->
-                event.getPlayer().teleport(PositionUtil.deserialize(config().getString("Spawn-Position"))));
+        node().addListener(PlayerLoadedEvent.class, event -> event.getPlayer().teleport(PositionUtil.deserialize(config().getString("Spawn-Position"))))
+                .addListener(PlayerMoveEvent.class, event -> {
+                            if (event.getNewPosition().y() > 0) {
+                                return;
+                            }
+
+                            event.getPlayer().teleport(PositionUtil.deserialize(config().getString("Spawn-Position")));
+                        }
+                );
     }
 
     @Override
