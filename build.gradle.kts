@@ -51,7 +51,9 @@ publishing {
             artifactId = "stomarcade"
             version = "$version"
 
-            from(components["java"])
+            artifact(tasks.named("shadowJar")) {
+                builtBy(tasks.named("shadowJar"))
+            }
         }
     }
 }
