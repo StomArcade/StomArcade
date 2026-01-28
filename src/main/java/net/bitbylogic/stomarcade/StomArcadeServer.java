@@ -3,6 +3,7 @@ package net.bitbylogic.stomarcade;
 import io.github.togar2.pvp.MinestomPvP;
 import net.bitbylogic.kardia.server.KardiaServer;
 import net.bitbylogic.orm.BormAPI;
+import net.bitbylogic.orm.util.TypeToken;
 import net.bitbylogic.rps.RedisManager;
 import net.bitbylogic.rps.client.RedisClient;
 import net.bitbylogic.stomarcade.block.SkullBlockHandler;
@@ -16,6 +17,7 @@ import net.bitbylogic.stomarcade.message.manager.MessageManager;
 import net.bitbylogic.stomarcade.message.messages.BrandingMessages;
 import net.bitbylogic.stomarcade.message.messages.ServerMessages;
 import net.bitbylogic.stomarcade.minigame.manager.MinigameManager;
+import net.bitbylogic.stomarcade.permission.database.processor.PermissionsFieldProcessor;
 import net.bitbylogic.stomarcade.permission.manager.PermissionManager;
 import net.bitbylogic.stomarcade.redis.AnnounceListener;
 import net.bitbylogic.stomarcade.redis.CommandListener;
@@ -32,12 +34,10 @@ import net.minestom.server.MinecraftServer;
 import net.minestom.server.command.ConsoleSender;
 import net.minestom.server.entity.Player;
 import net.minestom.server.event.player.AsyncPlayerConfigurationEvent;
-import net.minestom.server.event.player.PlayerBlockBreakEvent;
 import net.minestom.server.event.player.PlayerLoadedEvent;
 import net.minestom.server.instance.InstanceContainer;
 import net.minestom.server.instance.InstanceManager;
 import net.minestom.server.instance.SharedInstance;
-import net.minestom.server.instance.block.Block;
 import net.minestom.server.instance.block.BlockManager;
 import org.redisson.client.codec.StringCodec;
 import org.redisson.config.Config;
@@ -77,9 +77,11 @@ public final class StomArcadeServer {
         loadRedis();
 
         bormAPI = loadBORM();
+        bormAPI.registerFieldProcessor(new TypeToken<>() {}, new PermissionsFieldProcessor());
+
         lootTableManager = new LootTableManager();
         messageManager = new MessageManager();
-        permissionManager = new PermissionManager();
+        permissionManager = new PermissionManager(bormAPI);
         featureManager = new FeatureManager();
 
         serverManager = new ServerManager();
