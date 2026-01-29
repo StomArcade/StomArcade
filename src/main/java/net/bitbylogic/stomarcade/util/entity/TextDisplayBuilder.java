@@ -33,7 +33,7 @@ public class TextDisplayBuilder {
     private Vec scale = MetadataDef.Display.SCALE.defaultValue().asVec();
     private Point translation = MetadataDef.Display.TRANSLATION.defaultValue();
 
-    public TextDisplayBuilder() {}
+    private TextDisplayBuilder() {}
 
     public static TextDisplayBuilder empty() {
         return new TextDisplayBuilder();
